@@ -1,2 +1,11 @@
 <h1>キューポイント編集</h1>
-<% #TODO %>
+<%= form_for(@cuepoint) do |f| %>
+  <%= f.label :name, 'Name' %>
+  <%= f.text_field :name %>
+  <%= f.submit '登録' %>
+  
+<% end %>
+  <%= vast_url(@cuepoint) =%>
+  
+<%= link_to '中止', cuepoints_path %>
+<%= link_to '削除', @cuepoint, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>

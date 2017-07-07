@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607020029) do
+ActiveRecord::Schema.define(version: 20170706070825) do
 
   create_table "campaigns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 20170607020029) do
     t.integer "campaign_id", null: false
     t.index ["campaign_id"], name: "index_campaigns_cuepoints_on_campaign_id", using: :btree
     t.index ["cuepoint_id"], name: "index_campaigns_cuepoints_on_cuepoint_id", using: :btree
+  end
+
+  create_table "campaignscuepoints", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "campaign_id"
+    t.integer  "cuepoint_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["campaign_id"], name: "index_campaignscuepoints_on_campaign_id", using: :btree
+    t.index ["cuepoint_id"], name: "index_campaignscuepoints_on_cuepoint_id", using: :btree
   end
 
   create_table "cuepoints", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -46,4 +55,6 @@ ActiveRecord::Schema.define(version: 20170607020029) do
     t.index ["cuepoint_id"], name: "index_results_on_cuepoint_id", using: :btree
   end
 
+  add_foreign_key "campaignscuepoints", "campaigns"
+  add_foreign_key "campaignscuepoints", "cuepoints"
 end

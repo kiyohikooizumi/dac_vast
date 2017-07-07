@@ -1,2 +1,20 @@
 <h1>キャンペーン編集</h1>
-<% #TODO %>
+<%= form_for(@campaign) do |f| %>
+  <%= f.label :name, 'Name' %>
+  <%= f.text_field :name %>
+  <%= f.label :start_at, 'Start_at' %>
+  <%= f.text_field :start_at %>
+  <%= f.label :end_at, 'End at' %>
+  <%= f.text_field :end_at %>
+  <%= f.label :limit_start, 'Limit start' %>
+  <%= f.text_field :limit_start %>
+  <%= f.label :movie_url, 'Movie url' %>
+  <%= f.text_field :movie_url %>
+  <%= f.collection_check_boxes(:cuepoint_ids, Cuepoint.all, :id, :name)  do |cb| %>
+  <%= cb.label { cb.check_box + cb.text } %>
+  <% end %>
+
+  <%= f.submit '登録' %>
+<% end %>
+<%= link_to '中止', campaigns_path %>
+<%= link_to '削除', @campaign, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
